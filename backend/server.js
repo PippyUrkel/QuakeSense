@@ -3,12 +3,16 @@ const axios = require('axios')
 const cors = require('cors')
 const moment = require('moment') // For date manipulation
 const Arima = require('arima') // ARIMA library
+const path = require('path') // Path module
 const app = express()
 const port = 3000
 
 // Enable CORS
 app.use(cors())
 app.use(express.json())
+
+// Serve static files from the public folder
+app.use(express.static(path.join(__dirname, 'public')))
 
 // Logger middleware
 function logger() {
@@ -86,6 +90,11 @@ app.post('/predict', async (req, res) => {
 
 app.get('/', (req, res) => {
     res.send('Hello World!')
+})
+
+// Fallback route to serve the frontend's index.html for any unknown routes
+app.get('*', (req, res) => {
+  res.sendFile(path.join(__dirname, 'public', 'index.html'))
 })
 
 app.listen(port, () => {
