@@ -7,8 +7,10 @@ import 'leaflet/dist/leaflet.css'
 import 'leaflet.heat'
 import './dashboard.css'
 import axios from 'axios'
-
+import Summary from './Summary.jsx'
 ChartJS.register(CategoryScale, LinearScale, PointElement, LineElement, BarElement, Title, Tooltip, Legend)
+
+
 
 function Heatmap({ earthquakeData }) {
     const map = useMap()
@@ -58,7 +60,7 @@ function Dashboard() {
     const [timeSeriesData, setTimeSeriesData] = useState([])
     const [predictions, setPredictions] = useState([])
     const [confidenceIntervals, setConfidenceIntervals] = useState([])
-    const [heatmapData, setHeatmapData] = useState([])
+    // const [heatmapData, setHeatmapData] = useState([])
     const [loading, setLoading] = useState(true)
 
     // Data for new visualizations
@@ -78,12 +80,12 @@ function Dashboard() {
             setConfidenceIntervals(ci)
             console.log('Predictions:', predictedData)
 
-            const heatmapPoints = timeSeries.map((entry) => [
-            entry.latitude || 37.7749,
-            entry.longitude || -122.4194,
-            entry.magnitude,
-            ])
-            setHeatmapData(heatmapPoints)
+            // const heatmapPoints = timeSeries.map((entry) => [
+            // entry.latitude || 37.7749,
+            // entry.longitude || -122.4194,
+            // entry.magnitude,
+            // ])
+            // setHeatmapData(heatmapPoints)
         } catch (error) {
             console.error('Error fetching predictions:', error.message)
         } finally {
@@ -91,8 +93,8 @@ function Dashboard() {
         }
         }
 
-        if (earthquakes.length > 0) {
-        fetchPredictions()
+        if (Array.isArray(earthquakes) && earthquakes.length > 0) {   
+            fetchPredictions()
         }
     }, [earthquakes])
 
@@ -242,6 +244,7 @@ function Dashboard() {
         ],
     }
 
+
     // Box Plot Data for Magnitude by Region
     const boxPlotChartData = {
         labels: Object.keys(boxPlotData),
@@ -253,6 +256,9 @@ function Dashboard() {
         borderWidth: 1,
         })),
     }
+
+
+
 
     return (
         <div className="dashboard-container">
@@ -267,8 +273,11 @@ function Dashboard() {
                 <div className="dashboard-item-content">
                 <Line data={timeSeriesChartData} options={{ maintainAspectRatio: false }} />
                 </div>
-            </div><br></br>
+            </div>
+            <div className="dashboard-item">
+                <Summary />
 
+            </div>
             {/* ARIMA Predictions */}
             <div className="dashboard-item">
                 <h2 className="dashboard-item-title">ARIMA Predictions</h2>
@@ -322,7 +331,7 @@ function Dashboard() {
             <div className="dashboard-item">
                 <h2 className="dashboard-item-title">Earthquake Heatmap</h2>
                 <div className="dashboard-item-content">
-                <MapContainer center={[37.7749, -122.4194]} zoom={5} style={{ height: '500px', width: '100%' }}>
+                <MapContainer center={[37.7749, -122.4194]} zoom={5} style={{ height: '350px', width: '100%',marginBottom: '10px' }}>
                     <TileLayer
                     url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
                     attribution="&copy; OpenStreetMap contributors"
