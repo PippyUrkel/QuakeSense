@@ -72,8 +72,8 @@ Each chart is rendered dynamically based on the latest data:
 
 ```bash
 # Clone the repository
-git clone https://github.com/aiibooouuu/QuakeSense.git
-cd QuakeSense2
+git clone https://github.com/PippyUrkel/QuakeSense.git
+cd QuakeSense
 
 # Install dependencies
 npm install
