@@ -34,6 +34,10 @@ Raw seismic data provided by official sources like the USGS is complex and non-v
 - 📱 Fully responsive design
 - ⚡ Fast and serverless (No backend required)
 
+![image](https://github.com/PippyUrkel/QuakeSense/blob/master/frontend/src/assets/homepage.png)
+![image](https://github.com/PippyUrkel/QuakeSense/blob/master/frontend/src/assets/dashboard1.png)
+![image](https://github.com/PippyUrkel/QuakeSense/blob/master/frontend/src/assets/dashboard2.png)
+
 ---
 
 ## 🏗️ Tech Stack
