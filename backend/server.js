@@ -43,7 +43,7 @@ app.get('/earthquakes', async (req, res) => {
         const response = await axios.get(usgsUrl, { params })
 
         // Limit the response to the first 30 rows
-        const earthquakes = response.data.features.slice(0, 30)
+        const earthquakes = response.data.features.slice(0, 120)
         res.json(earthquakes)
     } catch (error) {
         console.error('Error fetching earthquake data:', error.message)
